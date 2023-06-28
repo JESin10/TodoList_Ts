@@ -1,10 +1,7 @@
-import { Route, Routes } from "react-router-dom";
-import Todos from "./components/Todos";
+import "./App.css";
 
-export default function App(): JSX.Element {
-  return (
-    <div className="App">
-      <Todos />
-    </div>
-  );
+function App() {
+  return <div className="App"></div>;
 }
+
+export default App;
