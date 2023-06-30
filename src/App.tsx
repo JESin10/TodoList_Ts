@@ -1,24 +1,71 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useReducer, useRef } from "react";
 import "./App.css";
+import Editor from "./components/Editor";
+import { Todo } from "./types";
+import TodoItem from "./components/TodoItem";
 
-interface Todo {
-  id: number;
-  // title: string;
-  content: string;
+type Action =
+  | {
+      type: "CREATE";
+      data: {
+        id: number;
+        // title: string;
+        content: string;
+      };
+    }
+  // | { type: "EDIT"; content: string }
+  | { type: "DELETE"; id: number };
+
+function reducer(state: Todo[], action: Action) {
+  switch (action.type) {
+    case "CREATE": {
+      return [...state, action.data];
+    }
+    case "DELETE": {
+      return state.filter((i) => i.id !== action.id);
+    }
+  }
+}
+
+export const TodoStateContext = React.createContext<Todo[] | null>(null);
+export const TodoDispatchContext = React.createContext<{
+  onClickAdd: (text: string) => void;
+  onClickDelete: (id: number) => void;
+  // onClickEdit: (edtiText: string) => void;
+} | null>(null);
+export function useTodoDispatch() {
+  const dispatch = useContext(TodoDispatchContext);
+  if (!dispatch) throw new Error("Context have a trouble");
+  return dispatch;
 }
 
 function App() {
-  const [todos, setTodos] = useState<Todo[]>([]);
-  const [inputText, setInputText] = useState("");
+  const [todos, dispatch] = useReducer(reducer, []);
   const idRef = useRef(0);
 
-  const onChangeTodoInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputText(e.target.value);
+  const onClickAdd = (text: string) => {
+    dispatch({
+      type: "CREATE",
+      data: {
+        id: idRef.current++,
+        content: text,
+      },
+    });
   };
 
-  const onClickAddTodo = () => {
-    setTodos([...todos, { id: idRef.current++, content: inputText }]);
+  const onClickDelete = (id: number) => {
+    dispatch({
+      type: "DELETE",
+      id: id,
+    });
   };
+
+  // const onClickEdit = (text: string) => {
+  //   dispatch({
+  //     type: "EDIT",
+  //     content: edtiText,
+  //   });
+  // };
 
   useEffect(() => {
     console.log(todos);
@@ -27,8 +74,16 @@ function App() {
   return (
     <div className="App">
       <h1>Todo</h1>
-      <input value={inputText} onChange={onChangeTodoInput} />
-      <button onClick={onClickAddTodo}> add</button>
+      <TodoStateContext.Provider value={todos}>
+        <TodoDispatchContext.Provider value={{ onClickAdd, onClickDelete }}>
+          <Editor />
+          <div>
+            {todos.map((todo) => (
+              <TodoItem key={todo.id} {...todo} />
+            ))}
+          </div>
+        </TodoDispatchContext.Provider>
+      </TodoStateContext.Provider>
     </div>
   );
 }
