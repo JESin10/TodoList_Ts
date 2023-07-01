@@ -9,7 +9,7 @@ interface CheckBoxProps {
 export default function CheckBox({ checked, onClickCheck }: CheckBoxProps) {
   return (
     <>
-      <div className="checkbox-container" onClick={onClickCheck}>
+      <div className="container" onClick={onClickCheck}>
         <div className="checkIcon">{checked && "✔️"}</div>
       </div>
     </>

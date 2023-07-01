@@ -18,7 +18,7 @@ export default function TodoItem(props: Props, { completed, children }: TextProp
 
   return (
     <div>
-      <div className="itemContainer">
+      <div className="item-Container">
         <CheckBox checked={completed} />
         <div className={`text ${completed ? "completedText" : ""}`}> {children} </div>
         No.{props.id} : {props.content}
