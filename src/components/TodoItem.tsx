@@ -1,26 +1,29 @@
 import React, { useState } from "react";
 import { Todo } from "../types";
 import { useTodoDispatch } from "../App";
-
+import "../components/todoItem.css";
+import CheckBox from "./CheckBox";
 interface Props extends Todo {}
-export default function TodoItem(props: Props) {
+interface TextProps extends Todo {
+  completed?: boolean;
+  children: React.ReactNode;
+}
+
+export default function TodoItem(props: Props, { completed, children }: TextProps) {
   const dispatch = useTodoDispatch();
-  const [editText, setEditText] = useState("");
-  const [isEditMode, setIsEditMode] = useState(false);
 
   const onClickDeleteBtn = () => {
     dispatch.onClickDelete(props.id);
   };
 
-  // const onClickEditBtn = () => {
-  //   dispatch.onClickEdit(EditText);
-  // };
-
   return (
     <div>
-      No.{props.id} : {props.content}
-      <button onClick={() => setIsEditMode(true)}> EDIT </button>
-      <button onClick={onClickDeleteBtn}>DELETE</button>
+      <div className="itemContainer">
+        <CheckBox checked={completed} />
+        <div className={`text ${completed ? "completedText" : ""}`}> {children} </div>
+        No.{props.id} : {props.content}
+        <button onClick={onClickDeleteBtn}>DELETE</button>
+      </div>
     </div>
   );
 }

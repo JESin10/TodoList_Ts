@@ -13,7 +13,6 @@ type Action =
         content: string;
       };
     }
-  // | { type: "EDIT"; content: string }
   | { type: "DELETE"; id: number };
 
 function reducer(state: Todo[], action: Action) {
@@ -31,7 +30,6 @@ export const TodoStateContext = React.createContext<Todo[] | null>(null);
 export const TodoDispatchContext = React.createContext<{
   onClickAdd: (text: string) => void;
   onClickDelete: (id: number) => void;
-  // onClickEdit: (edtiText: string) => void;
 } | null>(null);
 export function useTodoDispatch() {
   const dispatch = useContext(TodoDispatchContext);
@@ -39,7 +37,7 @@ export function useTodoDispatch() {
   return dispatch;
 }
 
-function App() {
+export default function App() {
   const [todos, dispatch] = useReducer(reducer, []);
   const idRef = useRef(0);
 
@@ -59,13 +57,6 @@ function App() {
       id: id,
     });
   };
-
-  // const onClickEdit = (text: string) => {
-  //   dispatch({
-  //     type: "EDIT",
-  //     content: edtiText,
-  //   });
-  // };
 
   useEffect(() => {
     console.log(todos);
@@ -87,5 +78,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
