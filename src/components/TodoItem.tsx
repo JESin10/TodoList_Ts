@@ -1,29 +1,33 @@
 import React, { useState } from "react";
-import { Todo } from "../types";
-import { useTodoDispatch } from "../App";
-import "../components/todoItem.css";
+import "../style/TodoItem.css";
 import CheckBox from "./CheckBox";
-interface Props extends Todo {}
-interface TextProps extends Todo {
+import DeleteBtn from "./DeleteBtn";
+import Text from "./Text";
+
+interface TextProps {
+  onClickCheckBox(id: number): void;
+  onClickDeleteBtn(id: number): void;
   completed?: boolean;
-  children: React.ReactNode;
+  text: string;
+  id: number;
 }
 
-export default function TodoItem(props: Props, { completed, children }: TextProps) {
-  const dispatch = useTodoDispatch();
-
-  const onClickDeleteBtn = () => {
-    dispatch.onClickDelete(props.id);
-  };
-
+export default function TodoItem({
+  onClickCheckBox,
+  onClickDeleteBtn,
+  completed,
+  text,
+  id,
+}: TextProps) {
   return (
-    <div>
-      <div className="item-Container">
-        <CheckBox checked={completed} />
-        <div className={`text ${completed ? "completedText" : ""}`}> {children} </div>
-        No.{props.id} : {props.content}
-        <button onClick={onClickDeleteBtn}>DELETE</button>
+    <>
+      <div className="item-container">
+        <CheckBox checked={completed} onClick={() => onClickCheckBox(id)} />
+        <Text completed={completed}>
+          no.{id}: {text}
+        </Text>
+        <DeleteBtn onClick={() => onClickDeleteBtn(id)} />
       </div>
-    </div>
+    </>
   );
 }

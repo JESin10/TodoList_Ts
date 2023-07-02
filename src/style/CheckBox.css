@@ -9,11 +9,13 @@
 
   border: 1px solid black;
   cursor: pointer;
-  background-color: grey;
+  /* background-color: grey; */
 }
+
 .container:hover {
   border: 2px solid rgb(0, 216, 0);
 }
+
 .checkIcon {
   position: absolute;
   font-size: 30px;

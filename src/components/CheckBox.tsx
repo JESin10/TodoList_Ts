@@ -1,15 +1,19 @@
 import React from "react";
-import "../components/checkBox.css";
+import "../style/CheckBox.css";
+import { TextProps } from "./Text";
 
 interface CheckBoxProps {
   checked?: boolean;
-  onClickCheck?(): void;
+  onClick(): void;
 }
 
-export default function CheckBox({ checked, onClickCheck }: CheckBoxProps) {
+export default function CheckBox(
+  { checked, onClick }: CheckBoxProps,
+  id: TextProps
+) {
   return (
     <>
-      <div className="container" onClick={onClickCheck}>
+      <div className="container" onClick={() => onClick}>
         <div className="checkIcon">{checked && "✔️"}</div>
       </div>
     </>

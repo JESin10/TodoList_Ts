@@ -1,0 +1,10 @@
+.deleteBtn-container {
+  width: 25px;
+  height: 25px;
+  font-size: 25px;
+  cusor: pointer;
+}
+
+.deleteBtn-container:hover {
+  color: red;
+}
