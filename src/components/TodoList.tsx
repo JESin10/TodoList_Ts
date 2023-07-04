@@ -30,7 +30,6 @@ export default function TodoList() {
   // 삭제버튼 핸들러
   const handleClickDeleteBtn = (id: number) => {
     setLists(lists.filter((list) => list.id !== id));
-    console.log(2);
   };
 
   //입력값변경 핸들러
@@ -52,8 +51,6 @@ export default function TodoList() {
     }
   };
 
-  console.log(lists);
-
   return (
     <div className="main-container">
       <div className="app-container">
@@ -69,7 +66,6 @@ export default function TodoList() {
             />
           ))}
         </div>
-        {/* <input onChange={(r) => setInputTodo(r.target.value)} /> */}
         <InputText
           onChange={handleInputTextChange}
           onKeyDown={handleActiveEnter}

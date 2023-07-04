@@ -6,10 +6,12 @@ interface DeleteBtnProps {
   onClick?(): void;
 }
 
-export default function DeleteBtn(onClick: DeleteBtnProps) {
+export default function DeleteBtn(props: DeleteBtnProps) {
   return (
-    <div className="deleteBtn-container" onClick={() => onClick}>
-      <BsTrash />
-    </div>
+    <>
+      <div className="deleteBtn-container" onClick={props.onClick}>
+        <BsTrash />
+      </div>
+    </>
   );
 }

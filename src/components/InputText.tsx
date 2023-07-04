@@ -20,8 +20,8 @@ export default function InputText({
         type="text"
         value={inputText}
         placeholder="할일을 입력하세요"
-        onChange={onChange}
-        onKeyDown={onKeyDown}
+        onChange={(e) => onChange(e)}
+        onKeyDown={(e) => onKeyDown(e)}
       />
     </>
   );
