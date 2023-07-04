@@ -12,11 +12,9 @@ interface TodoListProps {
 export default function TodoList() {
   const [inputTodo, setInputTodo] = useState("");
   const [lists, setLists] = useState<TodoListProps[]>([
-    { id: 1, text: "할일1", completed: false },
-    { id: 2, text: "할일2", completed: false },
-    { id: 3, text: "할일3", completed: true },
+    { id: 1, text: "TypeScript 프로젝트 만들기", completed: false },
   ]);
-  const nextId = useRef(4);
+  const nextId = useRef(2);
 
   //체크박스버튼 핸들러
   const handleClickCheckBox = (id: number) => {
