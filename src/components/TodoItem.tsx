@@ -7,17 +7,17 @@ import Text from "./Text";
 interface TextProps {
   onClickCheckBox(id: number): void;
   onClickDeleteBtn(id: number): void;
-  completed?: boolean;
   text: string;
   id: number;
+  completed?: boolean;
 }
 
 export default function TodoItem({
   onClickCheckBox,
   onClickDeleteBtn,
-  completed,
   text,
   id,
+  completed,
 }: TextProps) {
   return (
     <>
