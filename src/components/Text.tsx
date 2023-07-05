@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../style/Text.css";
+import tw from "tailwind-styled-components";
 
 export interface TextProps {
   completed?: boolean;
@@ -9,9 +9,21 @@ export interface TextProps {
 export default function Text({ completed, children }: TextProps) {
   return (
     <>
-      <div className={`text ${completed ? "completedText" : ""}`}>
-        {children}
-      </div>
+      {completed ? (
+        <CompletedText>{children}</CompletedText>
+      ) : (
+        <TextContainer>{children}</TextContainer>
+      )}
     </>
   );
 }
+
+const TextContainer = tw.div`
+w-full h-auto box-border 
+overflow-hidden truncate whitespace-nowrap
+px-2.5per
+`;
+
+const CompletedText = tw(TextContainer)`
+line-through
+`;

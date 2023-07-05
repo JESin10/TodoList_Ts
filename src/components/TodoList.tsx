@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import TodoItem from "./TodoItem";
 import InputText from "./InputText";
-import "../style/TodoList.css";
+import tw from "tailwind-styled-components";
 
 interface TodoListProps {
   id: number;
@@ -37,7 +37,8 @@ export default function TodoList() {
 
   //입력값엔터 핸들러
   const handleActiveEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && e.nativeEvent.isComposing === false) {
+      e.preventDefault();
       const newList: TodoListProps = {
         id: nextId.current,
         text: inputTodo,
@@ -50,26 +51,41 @@ export default function TodoList() {
   };
 
   return (
-    <div className="main-container">
-      <div className="app-container">
-        <div className="todoList">
-          {lists.map((list) => (
-            <TodoItem
-              key={`${list.id}list`}
-              id={list.id}
-              text={list.text}
-              completed={list.completed}
-              onClickCheckBox={handleClickCheckBox}
-              onClickDeleteBtn={handleClickDeleteBtn}
-            />
-          ))}
-        </div>
-        <InputText
-          onChange={handleInputTextChange}
-          onKeyDown={handleActiveEnter}
-          inputText={inputTodo}
-        />
-      </div>
-    </div>
+    <>
+      <div className="w-full h-6 bg-slate-500" />
+      <MainContainer>
+        <AppContainer>
+          <TodoListContainer>
+            {lists.map((list) => (
+              <TodoItem
+                key={`${list.id}list`}
+                id={list.id}
+                text={list.text}
+                completed={list.completed}
+                onClickCheckBox={handleClickCheckBox}
+                onClickDeleteBtn={handleClickDeleteBtn}
+              />
+            ))}
+          </TodoListContainer>
+          <InputText
+            onChange={handleInputTextChange}
+            onKeyDown={handleActiveEnter}
+            inputText={inputTodo}
+          />
+        </AppContainer>
+      </MainContainer>
+    </>
   );
 }
+
+const MainContainer = tw.div`
+  w-full h-full flex justify-center align-middle
+`;
+
+const AppContainer = tw.div`
+w-3/5 h-auto bg-white relative
+`;
+
+const TodoListContainer = tw.div`
+w-auto h-auto mx-2 bg-yellow-100 overflow-y-auto
+`;

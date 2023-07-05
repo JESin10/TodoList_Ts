@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "../style/TodoItem.css";
 import CheckBox from "./CheckBox";
 import DeleteBtn from "./DeleteBtn";
 import Text from "./Text";
+import tw from "tailwind-styled-components";
 
 interface TextProps {
   onClickCheckBox(id: number): void;
@@ -21,13 +21,18 @@ export default function TodoItem({
 }: TextProps) {
   return (
     <>
-      <div className="item-container">
+      <AllTodoContainer className="all-todo-container">
         <CheckBox checked={completed} onClick={() => onClickCheckBox(id)} />
         <Text completed={completed}>
           no.{id}: {text}
         </Text>
         <DeleteBtn onClick={() => onClickDeleteBtn(id)} />
-      </div>
+      </AllTodoContainer>
     </>
   );
 }
+
+const AllTodoContainer = tw.div`
+w-auto h-full p-3 flex justify-between items-center mt-1
+border-b-2 border-solid border-gray-500 box-border
+`;

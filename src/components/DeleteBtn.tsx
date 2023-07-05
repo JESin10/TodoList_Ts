@@ -1,6 +1,6 @@
 import React from "react";
-import "../style/DeleteBtn.css";
 import { BsTrash } from "react-icons/bs";
+import tw from "tailwind-styled-components";
 
 interface DeleteBtnProps {
   onClick?(): void;
@@ -9,9 +9,17 @@ interface DeleteBtnProps {
 export default function DeleteBtn(props: DeleteBtnProps) {
   return (
     <>
-      <div className="deleteBtn-container" onClick={props.onClick}>
+      <DeleteBtnContainer
+        className="deleteBtn-container"
+        onClick={props.onClick}
+      >
         <BsTrash />
-      </div>
+      </DeleteBtnContainer>
     </>
   );
 }
+
+const DeleteBtnContainer = tw.button`
+w-6 h-6 cursor-pointer font-bold text-2xl
+hover:text-red-500
+`;
