@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import TodoItem from "./TodoItem";
 import InputText from "./InputText";
 import tw from "tailwind-styled-components";
@@ -11,23 +11,36 @@ interface TodoListProps {
 
 export default function TodoList() {
   const [inputTodo, setInputTodo] = useState("");
-  const [lists, setLists] = useState<TodoListProps[]>([
-    { id: 1, text: "TypeScript 프로젝트 만들기", completed: false },
-  ]);
-  const nextId = useRef(2);
+  const [lists, setLists] = useState<TodoListProps[]>([]);
+  const nextId = useRef(1);
+
+  //useEffect를 사용해 db.json 서버내의 데이터 호출
+  useEffect(() => {
+    fetch("http://localhost:3001/Todos")
+      .then((res) => res.json())
+      .then((data) => setLists(data));
+  }, []);
 
   //체크박스버튼 핸들러
   const handleClickCheckBox = (id: number) => {
     setLists(
-      lists.map((list) =>
-        list.id === id ? { ...list, completed: !list.completed } : list
-      )
+      lists.map((list) => (list.id === id ? { ...list, completed: !list.completed } : list))
     );
+    fetch(`http://localhost:3001/Todos/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ complete: !lists.find((todo) => todo.id)?.completed }),
+    });
   };
 
   // 삭제버튼 핸들러
   const handleClickDeleteBtn = (id: number) => {
     setLists(lists.filter((list) => list.id !== id));
+    fetch(`http://localhost:3001/Todos/${id}`, {
+      method: "DELETE",
+    });
   };
 
   //입력값변경 핸들러
@@ -47,6 +60,16 @@ export default function TodoList() {
       setLists(lists.concat(newList));
       setInputTodo("");
       nextId.current++;
+
+      fetch("http://localhost:3001/Todos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newList),
+      })
+        .then((res) => res.json())
+        .then((data) => setLists([...lists, data]));
     }
   };
 

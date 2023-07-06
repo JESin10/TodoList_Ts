@@ -1,0 +1,6 @@
+{
+  "Todos": [
+    { "id": 1, "text": "TypeScript 프로젝트 만들기", "completed": false },
+    { "id": 2, "text": "TypeScript 프로젝트 만들기2", "completed": false }
+  ]
+}
