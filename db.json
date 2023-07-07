@@ -11,13 +11,13 @@
       "completed": false
     },
     {
-      "id": 3,
-      "text": "1시간 운동",
+      "id": 4,
+      "text": "todolist 완성하기",
       "completed": false
     },
     {
-      "id": 4,
-      "text": "TODO-List 완성",
+      "id": 5,
+      "text": "운동하기",
       "completed": false
     }
   ]
