@@ -35,4 +35,5 @@ export default function TodoItem({
 const AllTodoContainer = tw.div`
 w-auto h-full p-3 flex justify-between items-center mt-1
 border-b-2 border-solid border-gray-500 box-border
+font-bold
 `;
