@@ -20,10 +20,14 @@ isComposing의 경우 입력문자가 조합문자인지 아닌지를 boolean �
 <details><summary>id 중첩 </summary>
 
 사이트를 새로 구동할 경우 id가 계속 1부터 시작하는 문제 발생
+
 본래 기획의 경우 DB에 저장하지 않고 post, delete의 기능구현에 의의가 있던터라 id를 `const nextId = useRef(1);` 로 선언하고 이후 `nextId.current++`로 현재 선언된 todolist의 id에서 +1씩 하는 방식이었다.
+
 하지만 DB에 저장하게 되면서 VS code를 재구동할 경우 `nextId.current`가 1로 인식되어 1부터 생성, 완료나 삭제시 id를 통한 식별때문에 id:1로 만들어진 모든 TODO가 삭제, 완료되는 문제 발생
 
 따라서 `const currentId = lists.length > 0 ? lists[lists.length - 1].id : 0;`로 현재 list의 마지막 id값을 확인한 후 그 id값에 +1씩하게 되는 방법으로 변경하게 되었다.
+
+<img width="50%" alt="개선 전" src="https://github.com/JESin10/TodoList_Ts/assets/119720123/f8485401-67e1-4c76-ad63-891c93ee1a8c"> <img width="50%" alt="개선 후" src="https://github.com/JESin10/TodoList_Ts/assets/119720123/1df5a71f-0eea-4196-bafc-717c8a658547">
 
 </details>
 
