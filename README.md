@@ -17,7 +17,7 @@ isComposing의 경우 입력문자가 조합문자인지 아닌지를 boolean �
 
 </details>
 
-<details><summary>isComposing </summary>
+<details><summary>id 중첩 </summary>
 
 사이트를 새로 구동할 경우 id가 계속 1부터 시작하는 문제 발생
 본래 기획의 경우 DB에 저장하지 않고 post, delete의 기능구현에 의의가 있던터라 id를 `const nextId = useRef(1);` 로 선언하고 이후 `nextId.current++`로 현재 선언된 todolist의 id에서 +1씩 하는 방식이었다.
