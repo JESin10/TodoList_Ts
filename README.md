@@ -19,7 +19,7 @@ isComposing의 경우 입력문자가 조합문자인지 아닌지를 boolean �
 
 따라서 해당 프로퍼티를 조건에 추가해주도록 한다.
 
-<img width="50%" alt="개선 전" src="https://github.com/JESin10/TodoList_Ts/assets/119720123/f8485401-67e1-4c76-ad63-891c93ee1a8c"> <img width="50%" alt="개선 후" src="https://github.com/JESin10/TodoList_Ts/assets/119720123/1df5a71f-0eea-4196-bafc-717c8a658547">
+<img width="40%" alt="개선 전" src="https://github.com/JESin10/TodoList_Ts/assets/119720123/f8485401-67e1-4c76-ad63-891c93ee1a8c"> <img width="40%" alt="개선 후" src="https://github.com/JESin10/TodoList_Ts/assets/119720123/1df5a71f-0eea-4196-bafc-717c8a658547">
 
 </details>
 
