@@ -2,20 +2,23 @@
   "Todos": [
     {
       "id": 1,
-      "text": "타입스크립트 프로젝트 만들기",
+      "text": "타입스크립트 공부",
       "completed": false
     },
     {
       "id": 2,
-      "text": "외국어 공부하기",
-      "completed": false,
-      "complete": true
+      "text": "영어 공부",
+      "completed": false
     },
     {
       "id": 3,
-      "text": "오늘 하루 1시간 운동하기",
-      "completed": false,
-      "complete": true
+      "text": "1시간 운동",
+      "completed": false
+    },
+    {
+      "id": 4,
+      "text": "TODO-List 완성",
+      "completed": false
     }
   ]
 }

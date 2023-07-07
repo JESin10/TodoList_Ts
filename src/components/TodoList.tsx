@@ -12,7 +12,8 @@ interface TodoListProps {
 export default function TodoList() {
   const [inputTodo, setInputTodo] = useState("");
   const [lists, setLists] = useState<TodoListProps[]>([]);
-  const nextId = useRef(1);
+  // const nextId = useRef(1); // db.json에 저장하다 보니 새로 구동할때마다 1부터 시작하게 됨.
+
   //현재 시간을 담을 상태변수 선언
   const [currentDateTime, setCurrentDateTime] = useState("");
 
@@ -72,14 +73,20 @@ export default function TodoList() {
   const handleActiveEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && e.nativeEvent.isComposing === false) {
       e.preventDefault();
+      if (inputTodo.trim() === "") {
+        window.alert("값을 입력하세요");
+        return;
+      }
+      const currentId = lists.length > 0 ? lists[lists.length - 1].id : 0;
       const newList: TodoListProps = {
-        id: nextId.current,
+        id: currentId + 1,
+        // id: nextId.current,
         text: inputTodo,
         completed: false,
       };
       setLists(lists.concat(newList));
       setInputTodo("");
-      nextId.current++;
+      // nextId.current++;
 
       fetch("http://localhost:3001/Todos", {
         method: "POST",
